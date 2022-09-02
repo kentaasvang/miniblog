@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.http import (
+    HttpRequest,
+    HttpResponse
+    )
 
-# Create your views here.
-def index(req):
+
+def index(req: HttpRequest) -> HttpResponse:
     return render(req, "gui/index.html")
