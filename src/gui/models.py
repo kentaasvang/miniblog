@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=50)
@@ -8,7 +9,7 @@ class Post(models.Model):
     is_published = models.BooleanField(default=False)
     created = models.DateTimeField(editable=False)
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self, *args, **kwargs):
         """
         Update timestamps  
         """
@@ -18,5 +19,5 @@ class Post(models.Model):
         return super(Post, self).save(*args, **kwargs) 
             
 
-def _first_save(post: Post) -> bool:
+def _first_save(post):
     return True if not post.id else False

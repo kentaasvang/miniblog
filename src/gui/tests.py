@@ -8,7 +8,7 @@ class PostTests(TestCase):
     BODY="this is my content"
     PUBLISHED=False
 
-    def setUp(self) -> None:
+    def setUp(self):
         Post.objects.create(
             title=self.TITLE,
             body=self.BODY,
