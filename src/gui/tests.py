@@ -8,31 +8,28 @@ from faker import Faker
 from .models import Post
 
 
+def _posts_builder(num, is_published=True):
+    faker = Faker()
+    posts = []
+    for _ in range(num):
+        posts.append(
+           Post(
+               title=faker.text(10),
+               body=faker.text(),
+               is_published=is_published
+           ) 
+        )
+
+    return posts
+
 
 class PostTests(TestCase):
 
     faker = Faker()
 
-    pub_posts = []
-    not_pub_posts = []
+    pub_posts = _posts_builder(10)
+    not_pub_posts = _posts_builder(5, is_published=False)
 
-    for _ in range(10):
-        pub_posts.append(
-           Post(
-               title=faker.text(10),
-               body=faker.text(),
-               is_published=True
-           ) 
-        )
-
-    for _ in range(5):
-        not_pub_posts.append(
-           Post(
-               title=faker.text(10),
-               body=faker.text(),
-               is_published=False
-           ) 
-        )
 
     posts = pub_posts + not_pub_posts
 
@@ -66,3 +63,4 @@ class PostTests(TestCase):
 
         for post in self.not_pub_posts:
             self.assertNotContains(response, post.title)
+
