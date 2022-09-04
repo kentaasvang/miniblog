@@ -76,15 +76,17 @@ class GuiIndexViewTests(TestCase):
 
 class PostView(TestCase):
 
+    faker = Faker()
+
     published_post = {
-        "title": "my title", 
-        "body": "this is the body",
+        "title": faker.text(50), 
+        "body": faker.text(),
         "is_published": True
         }
 
     unpublished_post = {
-        "title": "my title", 
-        "body": "this is the body",
+        "title": faker.text(50), 
+        "body": faker.text(),
         "is_published": False
         }
     
