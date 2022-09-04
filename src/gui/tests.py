@@ -72,3 +72,38 @@ class GuiIndexViewTests(TestCase):
 
         for post in self.not_pub_posts:
             self.assertNotContains(response, post.title)
+
+
+class PostView(TestCase):
+
+    published_post = {
+        "title": "my title", 
+        "body": "this is the body",
+        "is_published": True
+        }
+
+    unpublished_post = {
+        "title": "my title", 
+        "body": "this is the body",
+        "is_published": True
+        }
+    
+    # objects returned by Model.objects.create is stored here
+    # because a reference to the Id is needed for testing
+    # and an if-check using on existing id on PostModel 
+    # prevents us from setting it ourself
+    pub_post_id = None
+    unpub_post_id = None
+    
+    def setUp(self):
+        self.client = Client()
+
+        created_pub_post = Post.objects.create(**self.published_post)
+        created_unpub_post = Post.objects.create(**self.unpublished_post)
+
+        self.pub_post_id = created_pub_post.id
+        self.unpub_post_id = created_unpub_post.id
+
+    def test_view_published_posts(self):
+        response = self.client.get(f"/post/{self.pub_post_id}")
+        self.assertContains(response, self.published_post["title"])
