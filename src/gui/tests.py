@@ -85,7 +85,7 @@ class PostView(TestCase):
     unpublished_post = {
         "title": "my title", 
         "body": "this is the body",
-        "is_published": True
+        "is_published": False
         }
     
     # objects returned by Model.objects.create is stored here
@@ -107,3 +107,7 @@ class PostView(TestCase):
     def test_view_published_posts(self):
         response = self.client.get(f"/post/{self.pub_post_id}")
         self.assertContains(response, self.published_post["title"])
+
+    def test_view_unpublished_posts(self):
+        response = self.client.get(f"/post/{self.unpub_post_id}")
+        self.assertEqual(response.status_code, 404)
