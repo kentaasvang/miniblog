@@ -8,7 +8,7 @@ from faker import Faker
 from .models import Post
 
 
-def _posts_builder(num, is_published=True):
+def _posts_builder(num, is_published=Post.PUBLISHED):
     faker = Faker()
     posts = []
     for _ in range(num):
@@ -33,7 +33,7 @@ def _bulk_insert(data, obj):
 class PostTests(TestCase):
 
     pub_posts = _posts_builder(10)
-    not_pub_posts = _posts_builder(5, is_published=False)
+    not_pub_posts = _posts_builder(5, is_published=Post.DRAFT)
     posts = pub_posts + not_pub_posts
 
     def setUp(self):
@@ -45,11 +45,10 @@ class PostTests(TestCase):
         self.assertEqual(len(posts), len(self.posts))
 
 
-
 class GuiIndexViewTests(TestCase):
 
     pub_posts = _posts_builder(10)
-    not_pub_posts = _posts_builder(5, is_published=False)
+    not_pub_posts = _posts_builder(5, is_published=Post.DRAFT)
     posts = pub_posts + not_pub_posts
 
     def setUp(self):
@@ -81,13 +80,13 @@ class PostView(TestCase):
     published_post = {
         "title": faker.text(50), 
         "body": faker.text(),
-        "is_published": True
+        "is_published": Post.PUBLISHED
         }
 
     unpublished_post = {
         "title": faker.text(50), 
         "body": faker.text(),
-        "is_published": False
+        "is_published": Post.DRAFT
         }
     
     # objects returned by Model.objects.create is stored here

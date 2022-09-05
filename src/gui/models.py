@@ -4,9 +4,18 @@ from django.utils import timezone
 
 # Create your models here.
 class Post(models.Model):
+
+    DRAFT="D"
+    PUBLISHED="P"
+
+    POST_STATES = [
+        (DRAFT, "Draft"),
+        (PUBLISHED, "Published")
+    ]
+
     title = models.CharField(max_length=50)
     body = models.TextField(null=True)
-    is_published = models.BooleanField(default=False)
+    is_published = models.CharField(choices=POST_STATES, default=DRAFT, max_length=1)
     created = models.DateTimeField(editable=False)
 
     def save(self, *args, **kwargs):
