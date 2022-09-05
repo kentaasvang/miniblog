@@ -18,9 +18,10 @@ class Post(models.Model):
         
         return super(Post, self).save(*args, **kwargs) 
 
-    def __str__(self):
-        return self.title
-            
+    class Meta:
+        # verbose_name_plural = "Posts"
+        ordering = ["created", "title"]
+
 
 def _first_save(post):
     return True if not post.id else False
