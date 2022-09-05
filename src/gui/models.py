@@ -15,7 +15,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=50)
     body = models.TextField(null=True)
-    is_published = models.CharField(choices=POST_STATES, default=DRAFT, max_length=1)
+    state = models.CharField(choices=POST_STATES, default=DRAFT, max_length=1)
     created = models.DateTimeField(editable=False)
 
     def save(self, *args, **kwargs):
@@ -29,7 +29,7 @@ class Post(models.Model):
 
     class Meta:
         # verbose_name_plural = "Posts"
-        ordering = ["created", "title"]
+        ordering = ["-created", "title", "state"]
 
 
 def _first_save(post):

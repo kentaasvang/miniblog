@@ -9,7 +9,7 @@ from .models import Post
 
 
 def index(req):
-    posts = Post.objects.filter(is_published=Post.PUBLISHED)
+    posts = Post.objects.filter(state=Post.PUBLISHED)
     context = {"posts": posts}
     return render(req, "gui/index.html", context=context)
 
@@ -17,7 +17,7 @@ def index(req):
 def post(req, id):
 
     try:
-        post = Post.objects.get(id=id, is_published=Post.PUBLISHED) 
+        post = Post.objects.get(id=id, state=Post.PUBLISHED) 
     except Post.DoesNotExist:
         raise Http404("post does not exist")
     
