@@ -17,6 +17,9 @@ class Post(models.Model):
             self.created = timezone.now()
         
         return super(Post, self).save(*args, **kwargs) 
+
+    def __str__(self):
+        return self.title
             
 
 def _first_save(post):
