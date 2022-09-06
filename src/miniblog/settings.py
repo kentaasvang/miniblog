@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from .site_config import SiteConfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +45,7 @@ ROOT_URLCONF = "miniblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"], # 'BASE_DIR / templates' is needed to override third-party app-templates
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
