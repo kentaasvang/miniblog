@@ -1,4 +1,4 @@
 
 
 class SiteConfig:
-    SITE_HEADER = "MY SITE HEADER"
+    SITE_HEADER = "Miniweb solutions"
