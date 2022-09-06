@@ -3,10 +3,10 @@ from django.test import (
     Client
 )
 from django.contrib.auth.models import User
-
 from .settings import SiteConfig
 
-def _setup_logged_in_superuser():
+
+def _set_up_logged_in_superuser():
     client = Client()
 
     user = User.objects.create_superuser(
@@ -19,10 +19,11 @@ def _setup_logged_in_superuser():
 
     return client
 
+
 class AdminTests(TestCase):
 
     def setUp(self):
-        self.client = _setup_logged_in_superuser()
+        self.client = _set_up_logged_in_superuser()
 
     def test_admin_site_displays_site_header(self):
 
