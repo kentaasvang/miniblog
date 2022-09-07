@@ -45,7 +45,7 @@ ROOT_URLCONF = "miniblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"], # 'BASE_DIR / templates' is needed to override third-party app-templates
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
