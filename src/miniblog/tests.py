@@ -3,7 +3,8 @@ from django.test import (
     Client
 )
 from django.contrib.auth.models import User
-from .settings import SiteConfig
+
+from . import settings
 
 
 def _set_up_logged_in_superuser():
@@ -28,4 +29,4 @@ class AdminTests(TestCase):
     def test_admin_site_displays_site_header(self):
 
         response = self.client.get("/admin/")
-        self.assertContains(response, SiteConfig.SITE_HEADER)
+        self.assertContains(response, settings.SITE_HEADER)
